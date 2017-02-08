@@ -63,7 +63,8 @@ function serverHandler(request, response) {
                 response.writeHead(200, {
                     'Content-Type': 'text/html'
                 });
-                response.write('<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=/demos/"></head><body></body></html>');
+                //response.write('<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=/demos/"></head><body></body></html>');
+                response.write('404 Not Found: ' + path.join('/', uri) + '\n');
                 response.end();
                 return;
             }
@@ -80,7 +81,7 @@ function serverHandler(request, response) {
             response.writeHead(404, {
                 'Content-Type': 'text/html'
             });
-
+            /*
             if (filename.indexOf('/demos/MultiRTC/') !== -1) {
                 filename = filename.replace('/demos/MultiRTC/', '');
                 filename += '/demos/MultiRTC/index.html';
@@ -89,7 +90,13 @@ function serverHandler(request, response) {
                 filename += '/demos/index.html';
             } else {
                 filename += '/demos/index.html';
-            }
+            }*/
+            response.writeHead(500, {
+                'Content-Type': 'text/plain'
+            });
+            response.write('404 Not Found: ' + path.join('/', uri) + '\n');
+            response.end();
+            return;
         }
 
 
@@ -102,7 +109,7 @@ function serverHandler(request, response) {
                 response.end();
                 return;
             }
-
+            /*
             try {
                 var demos = (fs.readdirSync('demos') || []);
 
@@ -123,7 +130,7 @@ function serverHandler(request, response) {
             try {
                 var docs = (fs.readdirSync('docs') || []);
 
-                if (docs.length) {
+                /*if (docs.length) {
                     var html = '<section class="experiment" id="docs">';
                     html += '<details><summary style="text-align:center;">RTCMultiConnection Docs</summary>';
                     html += '<h2 style="text-align:center;display:block;"><a href="http://www.rtcmulticonnection.org/docs/">http://www.rtcmulticonnection.org/docs/</a></h2>';
@@ -140,7 +147,7 @@ function serverHandler(request, response) {
                     file = file.replace('<section class="experiment own-widgets latest-commits">', html);
                 }
             } catch (e) {}
-
+            */
             response.writeHead(200);
             response.write(file, 'utf8');
             response.end();
